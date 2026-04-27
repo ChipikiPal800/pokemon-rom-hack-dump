@@ -8,7 +8,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #ffde00 0%, #f5a623 100%);
+            background: linear-gradient(135deg, #f5a623 0%, #cc7a00 100%);
             font-family: 'DM Sans', system-ui, sans-serif;
             min-height: 100vh;
             padding: 2rem 1.5rem;
@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 222, 0, 0.95), rgba(245, 166, 35, 0.95));
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.96), rgba(204, 122, 0, 0.96));
             z-index: 20000;
             overflow-y: auto;
             padding: 2rem 1.5rem;
@@ -36,10 +36,10 @@
             -webkit-background-clip: text;
             color: transparent;
         }
-        .header p { color: #2a6b2a; font-weight: 600; }
+        .header p { color: #fff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
         .badge-row { display: flex; justify-content: center; gap: 0.8rem; margin-top: 0.8rem; flex-wrap: wrap; }
         .badge {
-            background: rgba(203, 52, 52, 0.9);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 40px;
             padding: 4px 14px;
             font-size: 0.7rem;
@@ -49,26 +49,27 @@
 
         .toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem; align-items: center; }
         .search-box {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
-            border: 2px solid rgba(203, 52, 52, 0.5);
+            border: 2px solid rgba(255, 222, 0, 0.5);
             border-radius: 60px;
             padding: 0.5rem 1.2rem;
             display: flex;
             align-items: center;
             gap: 0.7rem;
         }
-        .search-box:focus-within { border-color: #cc0000; }
+        .search-box:focus-within { border-color: #ffde00; }
         #searchInput {
             background: transparent;
             border: none;
-            color: #2a1a00;
+            color: white;
             font-size: 0.9rem;
             width: 260px;
             outline: none;
         }
+        #searchInput::placeholder { color: #ffddaa; }
         .stats-badge {
-            background: rgba(59, 125, 59, 0.9);
+            background: rgba(0, 0, 0, 0.4);
             padding: 0.4rem 1rem;
             border-radius: 40px;
             font-size: 0.8rem;
@@ -89,17 +90,17 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            background: linear-gradient(115deg, rgba(59, 125, 59, 0.9), rgba(46, 87, 62, 0.95));
-            border: 2px solid #ffde00;
-            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 222, 0, 0.3);
+            border-radius: 20px;
             padding: 0.9rem 1.2rem;
             cursor: pointer;
-            transition: all 0.25s;
+            transition: all 0.2s;
         }
         .game-card:hover {
-            transform: translateY(-4px);
-            border-color: #cc0000;
-            background: #3b7d3b;
+            transform: translateY(-3px);
+            border-color: #ffde00;
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .game-icon { font-size: 2rem; min-width: 52px; }
@@ -109,15 +110,16 @@
             color: #ffde00;
         }
         .game-badge {
-            background: rgba(203, 52, 52, 0.9);
+            background: rgba(0, 0, 0, 0.6);
             font-size: 0.6rem;
             padding: 2px 8px;
             border-radius: 20px;
-            color: #ffde00;
+            color: #ffaa66;
+            margin-left: 6px;
         }
 
-        .no-results { text-align: center; grid-column: 1 / -1; padding: 3rem; background: rgba(0,0,0,0.2); border-radius: 48px; color: #2a2a00; }
-        .footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: #2a6b2a; }
+        .no-results { text-align: center; grid-column: 1 / -1; padding: 3rem; background: rgba(0,0,0,0.3); border-radius: 48px; color: #ffde00; }
+        .footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: rgba(255,255,255,0.6); }
 
         .fullscreen-modal {
             display: none;
@@ -136,8 +138,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-bottom: 2px solid #ffde00;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid #ffde00;
         }
         .fullscreen-title { color: #ffde00; font-weight: bold; }
         .fullscreen-close {
@@ -147,12 +149,13 @@
             font-size: 1.8rem;
             cursor: pointer;
         }
+        .fullscreen-close:hover { color: #ffde00; }
         .fullscreen-content { flex: 1; display: flex; justify-content: center; align-items: center; background: #000; }
         #fullscreenEmulator { width: 100%; height: 100%; }
 
         .letter-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-bottom: 1.5rem; }
         .letter-btn {
-            background: rgba(203, 52, 52, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid #ffde00;
             border-radius: 8px;
             padding: 0.3rem 0.7rem;
@@ -161,10 +164,15 @@
             color: #ffde00;
             cursor: pointer;
         }
-        .letter-btn:hover { background: #cc0000; }
-        .letter-btn.active { background: #cc0000; color: white; }
+        .letter-btn:hover { background: #ffde00; color: #8b0000; }
+        .letter-btn.active { background: #ffde00; color: #8b0000; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .games-grid { grid-template-columns: 1fr; }
+            .search-box #searchInput { width: 160px; }
+        }
     </style>
 </head>
 <body>
@@ -172,21 +180,22 @@
 <div class="game-selection" id="gameSelection">
     <div class="header">
         <h1>⚡ POKÉMON FAN GAMES ⚡</h1>
-        <p>1000+ fan-made Pokémon adventures</p>
+        <p>1000+ fan-made Pokémon adventures — ROM hacks, fan games, and more!</p>
         <div class="badge-row">
-            <div class="badge">🎮 Fan Games</div>
-            <div class="badge">⚡ Fullscreen</div>
+            <div class="badge">🎮 1000+ Fan Games</div>
+            <div class="badge">⚡ Fullscreen Play</div>
             <div class="badge">💾 Save States</div>
+            <div class="badge">✨ GBA/GB/GBC</div>
         </div>
     </div>
 
     <div class="toolbar">
         <div class="search-box">
             <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="search games...">
+            <input type="text" id="searchInput" placeholder="search Pokémon fan games...">
         </div>
         <div class="stats-badge">
-            📚 <span id="totalCount">0</span> games
+            📚 <span id="totalCount">0</span> fan games
         </div>
     </div>
 
@@ -215,24 +224,15 @@
     let romLibrary = [];
     let currentLetter = 'all';
     let searchTerm = '';
+    let currentEmulator = null;
     
-    // Fetch files from Google Drive - SIMPLE VERSION
     async function fetchGames() {
         const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${API_KEY}&fields=files(id,name)&pageSize=1000`;
-        
-        console.log('Fetching:', url);
-        
         const response = await fetch(url);
         const data = await response.json();
         
-        console.log('Response:', data);
+        if (!data.files) return [];
         
-        if (!data.files) {
-            console.error('No files found');
-            return [];
-        }
-        
-        // Filter for zip files (most ROM hacks are zipped)
         const games = data.files
             .filter(f => {
                 const name = f.name.toLowerCase();
@@ -241,27 +241,45 @@
             .map(f => ({
                 id: f.id,
                 name: f.name.replace(/\.(zip|gba|gb|gbc)$/i, ''),
-                ext: f.name.split('.').pop()
+                ext: f.name.split('.').pop().toUpperCase()
             }));
         
         games.sort((a, b) => a.name.localeCompare(b.name));
-        
-        console.log(`${games.length} games found`);
         return games;
     }
     
-    // Download and play game
+    function destroyEmulator() {
+        if (currentEmulator) {
+            try {
+                if (typeof currentEmulator.destroy === 'function') currentEmulator.destroy();
+                currentEmulator = null;
+            } catch(e) {}
+        }
+        if (window.EJS_emulator) {
+            try {
+                if (typeof window.EJS_emulator.destroy === 'function') window.EJS_emulator.destroy();
+                window.EJS_emulator = null;
+            } catch(e) {}
+        }
+        if (window.audioCtx) {
+            try { window.audioCtx.close(); } catch(e) {}
+            window.audioCtx = null;
+        }
+        const emulatorDiv = document.getElementById('fullscreenEmulator');
+        if (emulatorDiv) emulatorDiv.innerHTML = '';
+    }
+    
     async function playGame(fileId, gameName) {
         document.getElementById('fullscreenGameTitle').textContent = gameName;
         document.getElementById('fullscreenModal').classList.add('active');
         document.getElementById('gameSelection').classList.add('hide');
         
+        destroyEmulator();
+        
         try {
-            // Try direct download first
             const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${API_KEY}`;
             const response = await fetch(url);
             const blob = await response.blob();
-            
             launchEmulator(URL.createObjectURL(blob), gameName);
         } catch (error) {
             console.error('Error:', error);
@@ -274,6 +292,12 @@
     function launchEmulator(romUrl, gameName) {
         const emulatorDiv = document.getElementById('fullscreenEmulator');
         emulatorDiv.innerHTML = '';
+        
+        window.EJS_DEBUG_XX = true;
+        window.EJS_ignoreGamepad = true;
+        window.EJS_WebGL2 = false;
+        window.EJS_recanvas = true;
+        window.EJS_video = 'webgl1';
         
         window.EJS_player = '#fullscreenEmulator';
         window.EJS_core = 'gba';
@@ -289,119 +313,31 @@
         
         const script = document.createElement('script');
         script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+        script.onload = () => {
+            setTimeout(() => {
+                if (window.EJS_emulator) currentEmulator = window.EJS_emulator;
+            }, 500);
+        };
         document.body.appendChild(script);
     }
     
     function closeEmulator() {
+        destroyEmulator();
         document.getElementById('fullscreenModal').classList.remove('active');
         document.getElementById('fullscreenEmulator').innerHTML = '';
         document.getElementById('gameSelection').classList.remove('hide');
-        if (window.EJS_emulator) {
-            try { window.EJS_emulator.destroy?.(); } catch(e) {}
-            window.EJS_emulator = null;
-        }
     }
     
-    // Render games
     function renderGames() {
         let filtered = romLibrary;
-        
         if (searchTerm) {
-            filtered = romLibrary.filter(g => 
-                g.name.toLowerCase().includes(searchTerm.toLowerCase())
-            );
+            filtered = romLibrary.filter(g => g.name.toLowerCase().includes(searchTerm.toLowerCase()));
         }
-        
         if (currentLetter !== 'all') {
-            filtered = filtered.filter(g => 
-                g.name.charAt(0).toUpperCase() === currentLetter
-            );
+            filtered = filtered.filter(g => g.name.charAt(0).toUpperCase() === currentLetter);
         }
         
         document.getElementById('totalCount').innerText = filtered.length;
         const container = document.getElementById('gamesContainer');
         
         if (filtered.length === 0) {
-            container.innerHTML = '<div class="no-results">✨ no games found — try a different search ✨</div>';
-            return;
-        }
-        
-        container.innerHTML = filtered.map(game => `
-            <div class="game-card" data-id="${game.id}" data-name="${escapeHtml(game.name)}">
-                <div class="game-icon">🎮</div>
-                <div class="game-info">
-                    <div class="game-title">
-                        ${escapeHtml(game.name)}
-                        <span class="game-badge">${game.ext.toUpperCase()}</span>
-                    </div>
-                    <div class="arrow-hint" style="opacity:0.6; font-size:0.7rem;">▶ play now</div>
-                </div>
-            </div>
-        `).join('');
-        
-        document.querySelectorAll('.game-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const id = card.getAttribute('data-id');
-                const name = card.getAttribute('data-name');
-                playGame(id, name);
-            });
-        });
-    }
-    
-    function escapeHtml(str) {
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-    
-    function buildLetterJump() {
-        const letters = ['all', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-        
-        const container = document.getElementById('letterJump');
-        container.innerHTML = letters.map(letter => `
-            <button class="letter-btn ${letter === currentLetter ? 'active' : ''}" data-letter="${letter}">${letter === 'all' ? 'ALL' : letter}</button>
-        `).join('');
-        
-        document.querySelectorAll('.letter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentLetter = btn.getAttribute('data-letter');
-                document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderGames();
-            });
-        });
-    }
-    
-    // Initialize
-    async function init() {
-        const container = document.getElementById('gamesContainer');
-        container.innerHTML = '<div class="no-results"><div style="text-align:center"><div style="width:40px;height:40px;border:3px solid rgba(203,52,52,0.2);border-top-color:#cc0000;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px"></div><p>Loading Pokémon fan games...</p></div></div>';
-        
-        romLibrary = await fetchGames();
-        buildLetterJump();
-        renderGames();
-    }
-    
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        searchTerm = e.target.value;
-        renderGames();
-    });
-    
-    document.getElementById('fullscreenCloseBtn').addEventListener('click', closeEmulator);
-    document.getElementById('fullscreenModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('fullscreenModal')) closeEmulator();
-    });
-    
-    document.addEventListener('keydown', (e) => {
-        if (document.getElementById('fullscreenModal').classList.contains('active') && e.key === 'Escape') {
-            closeEmulator();
-        }
-    });
-    
-    init();
-</script>
-</body>
-</html>
