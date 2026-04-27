@@ -12,21 +12,6 @@
             font-family: 'DM Sans', system-ui, sans-serif;
             min-height: 100vh;
             padding: 2rem 1.5rem;
-            position: relative;
-        }
-        /* Pikachu lightning bolt pattern overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><polygon points="50,10 60,40 90,40 65,60 75,90 50,70 25,90 35,60 10,40 40,40" fill="%23fff"/></svg>');
-            background-repeat: repeat;
-            background-size: 80px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         .game-selection {
@@ -35,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 222, 0, 0.92), rgba(245, 166, 35, 0.92));
+            background: linear-gradient(135deg, rgba(255, 222, 0, 0.95), rgba(245, 166, 35, 0.95));
             z-index: 20000;
             overflow-y: auto;
             padding: 2rem 1.5rem;
@@ -50,14 +35,11 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .header p { color: #2a6b2a; font-size: 0.9rem; font-weight: 600; }
+        .header p { color: #2a6b2a; font-weight: 600; }
         .badge-row { display: flex; justify-content: center; gap: 0.8rem; margin-top: 0.8rem; flex-wrap: wrap; }
         .badge {
             background: rgba(203, 52, 52, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 40px;
             padding: 4px 14px;
             font-size: 0.7rem;
@@ -76,7 +58,7 @@
             align-items: center;
             gap: 0.7rem;
         }
-        .search-box:focus-within { border-color: #cc0000; box-shadow: 0 0 15px rgba(203, 52, 52, 0.4); }
+        .search-box:focus-within { border-color: #cc0000; }
         #searchInput {
             background: transparent;
             border: none;
@@ -84,9 +66,7 @@
             font-size: 0.9rem;
             width: 260px;
             outline: none;
-            font-weight: 500;
         }
-        #searchInput::placeholder { color: #8b6b2a; }
         .stats-badge {
             background: rgba(59, 125, 59, 0.9);
             padding: 0.4rem 1rem;
@@ -94,9 +74,8 @@
             font-size: 0.8rem;
             color: #ffde00;
             font-weight: bold;
-            border: 1px solid #ffde00;
         }
-        .stats-badge span { color: #fff; font-weight: bold; }
+        .stats-badge span { color: white; }
 
         .games-grid {
             display: grid;
@@ -111,47 +90,23 @@
             align-items: center;
             gap: 1rem;
             background: linear-gradient(115deg, rgba(59, 125, 59, 0.9), rgba(46, 87, 62, 0.95));
-            backdrop-filter: blur(2px);
             border: 2px solid #ffde00;
             border-radius: 24px;
             padding: 0.9rem 1.2rem;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            position: relative;
-            overflow: hidden;
-        }
-        .game-card::before {
-            content: '⚡';
-            position: absolute;
-            right: -20px;
-            top: -20px;
-            font-size: 60px;
-            opacity: 0.1;
-            transition: 0.3s;
-        }
-        .game-card:hover::before {
-            opacity: 0.2;
-            transform: rotate(20deg);
+            transition: all 0.25s;
         }
         .game-card:hover {
-            transform: translateY(-4px) scale(1.01);
+            transform: translateY(-4px);
             border-color: #cc0000;
-            background: linear-gradient(115deg, #3b7d3b, #2a5a2a);
-            box-shadow: 0 14px 28px -8px rgba(0,0,0,0.4);
+            background: #3b7d3b;
         }
 
-        .game-icon { font-size: 2rem; min-width: 52px; text-align: center; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-        .game-info { flex: 1; }
+        .game-icon { font-size: 2rem; min-width: 52px; }
         .game-title {
             font-weight: 700;
             font-size: 0.95rem;
             color: #ffde00;
-            letter-spacing: -0.2px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
         .game-badge {
             background: rgba(203, 52, 52, 0.9);
@@ -159,13 +114,10 @@
             padding: 2px 8px;
             border-radius: 20px;
             color: #ffde00;
-            font-weight: bold;
         }
-        .arrow-hint { opacity: 0.6; font-size: 0.7rem; transition: 0.2s; color: #fff; }
-        .game-card:hover .arrow-hint { opacity: 1; transform: translateX(3px); color: #ffde00; }
 
         .no-results { text-align: center; grid-column: 1 / -1; padding: 3rem; background: rgba(0,0,0,0.2); border-radius: 48px; color: #2a2a00; }
-        .footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: #2a6b2a; border-top: 1px solid rgba(203, 52, 52, 0.3); padding-top: 1.8rem; font-weight: bold; }
+        .footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: #2a6b2a; }
 
         .fullscreen-modal {
             display: none;
@@ -185,24 +137,18 @@
             align-items: center;
             padding: 12px 20px;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
             border-bottom: 2px solid #ffde00;
-            z-index: 10;
         }
-        .fullscreen-title { color: #ffde00; font-weight: bold; font-size: 0.9rem; }
+        .fullscreen-title { color: #ffde00; font-weight: bold; }
         .fullscreen-close {
             background: none;
             border: none;
             color: white;
             font-size: 1.8rem;
             cursor: pointer;
-            padding: 0 10px;
-            transition: 0.2s;
         }
-        .fullscreen-close:hover { color: #ffde00; transform: scale(1.1); }
         .fullscreen-content { flex: 1; display: flex; justify-content: center; align-items: center; background: #000; }
-        #fullscreenEmulator { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-        #fullscreenEmulator canvas { max-width: 100%; max-height: calc(100vh - 60px); object-fit: contain; }
+        #fullscreenEmulator { width: 100%; height: 100%; }
 
         .letter-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-bottom: 1.5rem; }
         .letter-btn {
@@ -214,57 +160,33 @@
             font-weight: bold;
             color: #ffde00;
             cursor: pointer;
-            transition: all 0.15s;
-            font-family: monospace;
         }
-        .letter-btn:hover { background: #cc0000; transform: scale(1.05); }
-        .letter-btn.active { background: #cc0000; color: #fff; border-color: #fff; }
-
-        .pokeball-bg {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 80px;
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .letter-btn:hover { background: #cc0000; }
+        .letter-btn.active { background: #cc0000; color: white; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 640px) {
-            body { padding: 1rem; }
-            .games-grid { grid-template-columns: 1fr; }
-            .game-card { padding: 0.7rem 1rem; }
-            .game-icon { font-size: 1.6rem; min-width: 45px; }
-            .search-box #searchInput { width: 160px; }
-            .letter-btn { padding: 0.2rem 0.5rem; font-size: 0.6rem; }
-        }
     </style>
 </head>
 <body>
 
-<div class="pokeball-bg">⚡</div>
-
 <div class="game-selection" id="gameSelection">
     <div class="header">
         <h1>⚡ POKÉMON FAN GAMES ⚡</h1>
-        <p>1000+ fan-made Pokémon adventures — from ROM hacks to original creations</p>
+        <p>1000+ fan-made Pokémon adventures</p>
         <div class="badge-row">
-            <div class="badge">🎮 1000+ Games</div>
-            <div class="badge">⚡ Fullscreen Play</div>
+            <div class="badge">🎮 Fan Games</div>
+            <div class="badge">⚡ Fullscreen</div>
             <div class="badge">💾 Save States</div>
-            <div class="badge">🎮 Gamepad Ready</div>
-            <div class="badge">✨ Fan Made</div>
         </div>
     </div>
 
     <div class="toolbar">
         <div class="search-box">
             <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="search Pokémon fan games...">
+            <input type="text" id="searchInput" placeholder="search games...">
         </div>
         <div class="stats-badge">
-            📚 <span id="totalCount">0</span> fan games
+            📚 <span id="totalCount">0</span> games
         </div>
     </div>
 
@@ -272,7 +194,7 @@
     <div id="gamesContainer" class="games-grid"></div>
 
     <div class="footer">
-        <span>⚡ Pokémon Fan Games Hub • Click any game to play • Gotta Play 'Em All! ⚡</span>
+        <span>⚡ Gotta Play 'Em All! ⚡</span>
     </div>
 </div>
 
@@ -287,152 +209,76 @@
 </div>
 
 <script>
-    // ============ YOUR GOOGLE DRIVE SETUP ============
     const FOLDER_ID = '1hdxQGVA8QSmmaB87F7wu_hDl0O09KUOp';
     const API_KEY = 'AIzaSyAL1l3O7Jr8M635xZsxT3jI9yE-yp13KTc';
     
     let romLibrary = [];
-    let currentRomName = '';
-    let currentRomBlob = null;
     let currentLetter = 'all';
     let searchTerm = '';
     
-    const CORS_PROXIES = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?', 'https://api.codetabs.com/v1/proxy?quest='];
-    
-    // ============ FETCH ROMS FROM GOOGLE DRIVE ============
-    async function fetchDriveFolder() {
-        const files = [];
-        let pageToken = '';
-        try {
-            do {
-                let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${API_KEY}&pageSize=1000&fields=nextPageToken,files(id,name,size)`;
-                if (pageToken) url += `&pageToken=${pageToken}`;
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('API request failed');
-                const data = await response.json();
-                // Look for .zip, .gb, .gba files (Pokémon fan games in various formats)
-                const validFiles = (data.files || []).filter(f => {
-                    const name = f.name.toLowerCase();
-                    return name.endsWith('.zip') || name.endsWith('.gb') || name.endsWith('.gba');
-                });
-                files.push(...validFiles.map(f => ({
-                    id: f.id,
-                    name: f.name.replace(/\.(zip|gb|gba)$/i, ''),
-                    size: formatSize(parseInt(f.size) || 0)
-                })));
-                pageToken = data.nextPageToken;
-            } while (pageToken);
-            files.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
-            return files;
-        } catch (error) {
-            console.error('Drive API error:', error);
-            throw new Error('Failed to load games. Make sure the folder is public.');
+    // Fetch files from Google Drive - SIMPLE VERSION
+    async function fetchGames() {
+        const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${API_KEY}&fields=files(id,name)&pageSize=1000`;
+        
+        console.log('Fetching:', url);
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        console.log('Response:', data);
+        
+        if (!data.files) {
+            console.error('No files found');
+            return [];
         }
-    }
-    
-    function formatSize(bytes) {
-        if (bytes < 1048576) return (bytes / 1024).toFixed(0) + ' KB';
-        return (bytes / 1048576).toFixed(1) + ' MB';
-    }
-    
-    // ============ DOWNLOAD ROM (handles zip extraction) ============
-    async function downloadRom(fileId, fileName) {
-        // Method 1: Direct API download with API key
-        const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${API_KEY}`;
-        try {
-            const response = await fetch(apiUrl);
-            if (response.ok) {
-                let blob = await response.blob();
-                if (blob.size > 1000) {
-                    // If it's a zip file, try to extract the ROM
-                    if (fileName.toLowerCase().endsWith('.zip') || blob.type === 'application/zip') {
-                        try {
-                            if (!window.JSZip) {
-                                await new Promise((resolve) => {
-                                    const script = document.createElement('script');
-                                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-                                    script.onload = resolve;
-                                    document.head.appendChild(script);
-                                });
-                            }
-                            if (window.JSZip) {
-                                const zip = await JSZip.loadAsync(blob);
-                                const romFile = Object.keys(zip.files).find(f => 
-                                    f.toLowerCase().endsWith('.gb') || 
-                                    f.toLowerCase().endsWith('.gba') ||
-                                    f.toLowerCase().endsWith('.gbc')
-                                );
-                                if (romFile) {
-                                    blob = await zip.files[romFile].async('blob');
-                                }
-                            }
-                        } catch(e) { console.log('Extraction failed:', e); }
-                    }
-                    return blob;
-                }
-            }
-        } catch (e) {}
         
-        // Method 2: Try the download URL with public access
-        try {
-            const directUrl = `https://drive.usercontent.google.com/download?id=${fileId}&export=download&confirm=t`;
-            const response = await fetch(directUrl);
-            if (response.ok) {
-                let blob = await response.blob();
-                if (blob.size > 1000) {
-                    if (fileName.toLowerCase().endsWith('.zip') || blob.type === 'application/zip') {
-                        try {
-                            if (window.JSZip) {
-                                const zip = await JSZip.loadAsync(blob);
-                                const romFile = Object.keys(zip.files).find(f => 
-                                    f.toLowerCase().endsWith('.gb') || 
-                                    f.toLowerCase().endsWith('.gba') ||
-                                    f.toLowerCase().endsWith('.gbc')
-                                );
-                                if (romFile) {
-                                    blob = await zip.files[romFile].async('blob');
-                                }
-                            }
-                        } catch(e) {}
-                    }
-                    return blob;
-                }
-            }
-        } catch (e) {}
+        // Filter for zip files (most ROM hacks are zipped)
+        const games = data.files
+            .filter(f => {
+                const name = f.name.toLowerCase();
+                return name.endsWith('.zip') || name.endsWith('.gba') || name.endsWith('.gb') || name.endsWith('.gbc');
+            })
+            .map(f => ({
+                id: f.id,
+                name: f.name.replace(/\.(zip|gba|gb|gbc)$/i, ''),
+                ext: f.name.split('.').pop()
+            }));
         
-        throw new Error('Download failed');
+        games.sort((a, b) => a.name.localeCompare(b.name));
+        
+        console.log(`${games.length} games found`);
+        return games;
     }
     
-    // ============ LOAD AND PLAY ROM ============
-    async function loadRom(fileId, name, fileName) {
-        document.getElementById('fullscreenGameTitle').textContent = `${name}`;
+    // Download and play game
+    async function playGame(fileId, gameName) {
+        document.getElementById('fullscreenGameTitle').textContent = gameName;
         document.getElementById('fullscreenModal').classList.add('active');
         document.getElementById('gameSelection').classList.add('hide');
         
         try {
-            const blob = await downloadRom(fileId, fileName);
-            currentRomName = name;
-            currentRomBlob = blob;
-            launchEmulator(URL.createObjectURL(blob), name);
+            // Try direct download first
+            const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${API_KEY}`;
+            const response = await fetch(url);
+            const blob = await response.blob();
+            
+            launchEmulator(URL.createObjectURL(blob), gameName);
         } catch (error) {
-            console.error('Load error:', error);
+            console.error('Error:', error);
             alert('Failed to load game: ' + error.message);
             document.getElementById('fullscreenModal').classList.remove('active');
             document.getElementById('gameSelection').classList.remove('hide');
         }
     }
     
-    // ============ LAUNCH EMULATOR ============
     function launchEmulator(romUrl, gameName) {
         const emulatorDiv = document.getElementById('fullscreenEmulator');
         emulatorDiv.innerHTML = '';
         
-        // Detect core based on file extension (GBA or GB/GBC)
-        // For Pokémon fan games, most are GBA ROM hacks
         window.EJS_player = '#fullscreenEmulator';
-        window.EJS_core = 'gba';  // GBA core works for most Pokémon fan games
+        window.EJS_core = 'gba';
         window.EJS_gameName = gameName;
-        window.EJS_color = '#c41e3a';
+        window.EJS_color = '#ffcc00';
         window.EJS_startOnLoaded = true;
         window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
         window.EJS_gameUrl = romUrl;
@@ -447,10 +293,8 @@
     }
     
     function closeEmulator() {
-        const modal = document.getElementById('fullscreenModal');
-        const emulatorDiv = document.getElementById('fullscreenEmulator');
-        modal.classList.remove('active');
-        emulatorDiv.innerHTML = '';
+        document.getElementById('fullscreenModal').classList.remove('active');
+        document.getElementById('fullscreenEmulator').innerHTML = '';
         document.getElementById('gameSelection').classList.remove('hide');
         if (window.EJS_emulator) {
             try { window.EJS_emulator.destroy?.(); } catch(e) {}
@@ -458,34 +302,19 @@
         }
     }
     
-    // ============ GAME ICON ============
-    function getGameIcon(name) {
-        const lower = name.toLowerCase();
-        if (lower.includes('pikachu')) return '⚡';
-        if (lower.includes('charizard')) return '🐉';
-        if (lower.includes('mewtwo')) return '🧬';
-        if (lower.includes('lugia')) return '🌊';
-        if (lower.includes('ho-oh')) return '🌈';
-        if (lower.includes('rayquaza')) return '🌌';
-        if (lower.includes('darkrai')) return '🌙';
-        if (lower.includes('giratina')) return '👻';
-        if (lower.includes('arceus')) return '✨';
-        return '⚡';
-    }
-    
-    // ============ RENDER GAMES ============
+    // Render games
     function renderGames() {
         let filtered = romLibrary;
         
         if (searchTerm) {
-            filtered = romLibrary.filter(rom => 
-                rom.name.toLowerCase().includes(searchTerm.toLowerCase())
+            filtered = romLibrary.filter(g => 
+                g.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
         
         if (currentLetter !== 'all') {
-            filtered = filtered.filter(rom => 
-                rom.name.charAt(0).toUpperCase() === currentLetter
+            filtered = filtered.filter(g => 
+                g.name.charAt(0).toUpperCase() === currentLetter
             );
         }
         
@@ -493,47 +322,28 @@
         const container = document.getElementById('gamesContainer');
         
         if (filtered.length === 0) {
-            container.innerHTML = `<div class="no-results">✨ no Pokémon fan games found — try a different search or letter ✨</div>`;
+            container.innerHTML = '<div class="no-results">✨ no games found — try a different search ✨</div>';
             return;
         }
         
-        const grouped = {};
-        filtered.forEach(rom => {
-            const firstLetter = rom.name.charAt(0).toUpperCase();
-            if (!grouped[firstLetter]) grouped[firstLetter] = [];
-            grouped[firstLetter].push(rom);
-        });
-        
-        const letters = Object.keys(grouped).sort();
-        let html = '';
-        letters.forEach(letter => {
-            html += `<div style="margin-bottom: 0.5rem; padding-left: 0.5rem;"><span style="color: #cc0000; font-size: 1.2rem; font-weight: bold; border-left: 3px solid #cc0000; padding-left: 10px;">${letter}</span></div>`;
-            html += `<div style="display: contents;">`;
-            grouped[letter].forEach(rom => {
-                html += `
-                    <div class="game-card" data-id="${rom.id}" data-name="${escapeHtml(rom.name)}" data-file="${rom.fileName || ''}">
-                        <div class="game-icon">🎮</div>
-                        <div class="game-info">
-                            <div class="game-title">
-                                ⚡ ${escapeHtml(rom.name)}
-                                <span class="game-badge">FAN GAME</span>
-                            </div>
-                            <div class="arrow-hint">▶ play now</div>
-                        </div>
+        container.innerHTML = filtered.map(game => `
+            <div class="game-card" data-id="${game.id}" data-name="${escapeHtml(game.name)}">
+                <div class="game-icon">🎮</div>
+                <div class="game-info">
+                    <div class="game-title">
+                        ${escapeHtml(game.name)}
+                        <span class="game-badge">${game.ext.toUpperCase()}</span>
                     </div>
-                `;
-            });
-            html += `</div>`;
-        });
-        
-        container.innerHTML = html;
+                    <div class="arrow-hint" style="opacity:0.6; font-size:0.7rem;">▶ play now</div>
+                </div>
+            </div>
+        `).join('');
         
         document.querySelectorAll('.game-card').forEach(card => {
             card.addEventListener('click', () => {
-                const fileId = card.getAttribute('data-id');
-                const gameName = card.getAttribute('data-name');
-                const fileName = card.getAttribute('data-file');
-                loadRom(fileId, gameName, fileName);
+                const id = card.getAttribute('data-id');
+                const name = card.getAttribute('data-name');
+                playGame(id, name);
             });
         });
     }
@@ -548,9 +358,7 @@
     }
     
     function buildLetterJump() {
-        const letters = [];
-        for (let i = 65; i <= 90; i++) letters.push(String.fromCharCode(i));
-        letters.unshift('all');
+        const letters = ['all', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
         
         const container = document.getElementById('letterJump');
         container.innerHTML = letters.map(letter => `
@@ -567,28 +375,19 @@
         });
     }
     
-    // ============ INITIALIZE ============
+    // Initialize
     async function init() {
         const container = document.getElementById('gamesContainer');
-        container.innerHTML = '<div class="no-results"><div style="text-align:center"><div class="spinner" style="width:40px;height:40px;border:3px solid rgba(203,52,52,0.2);border-top-color:#cc0000;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px"></div><p>Loading 1000+ Pokémon fan games...</p><p style="font-size:12px;margin-top:8px;">⚡ Gotta fetch 'em all! ⚡</p></div></div>';
+        container.innerHTML = '<div class="no-results"><div style="text-align:center"><div style="width:40px;height:40px;border:3px solid rgba(203,52,52,0.2);border-top-color:#cc0000;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px"></div><p>Loading Pokémon fan games...</p></div></div>';
         
-        try {
-            romLibrary = await fetchDriveFolder();
-            buildLetterJump();
-            renderGames();
-        } catch (error) {
-            console.error(error);
-            container.innerHTML = `<div class="no-results"><p>Error loading games: ${error.message}</p><p style="margin-top:10px;font-size:12px">Make sure the Google Drive folder is public</p></div>`;
-        }
+        romLibrary = await fetchGames();
+        buildLetterJump();
+        renderGames();
     }
     
-    let debounceTimer;
     document.getElementById('searchInput').addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            searchTerm = e.target.value.trim();
-            renderGames();
-        }, 250);
+        searchTerm = e.target.value;
+        renderGames();
     });
     
     document.getElementById('fullscreenCloseBtn').addEventListener('click', closeEmulator);
@@ -601,11 +400,6 @@
             closeEmulator();
         }
     });
-    
-    // Preload JSZip for zip extraction
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-    document.head.appendChild(script);
     
     init();
 </script>
