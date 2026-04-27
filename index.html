@@ -341,3 +341,84 @@
         const container = document.getElementById('gamesContainer');
         
         if (filtered.length === 0) {
+            container.innerHTML = '<div class="no-results">⚡ no Pokémon fan games found — try a different search ⚡</div>';
+            return;
+        }
+        
+        container.innerHTML = filtered.map(game => `
+            <div class="game-card" data-id="${game.id}" data-name="${escapeHtml(game.name)}">
+                <div class="game-icon">⚡</div>
+                <div class="game-info">
+                    <div class="game-title">
+                        ${escapeHtml(game.name)}
+                        <span class="game-badge">${game.ext}</span>
+                    </div>
+                    <div class="arrow-hint" style="opacity:0.6; font-size:0.7rem;">▶ play now</div>
+                </div>
+            </div>
+        `).join('');
+        
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.getAttribute('data-id');
+                const name = card.getAttribute('data-name');
+                playGame(id, name);
+            });
+        });
+    }
+    
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    function buildLetterJump() {
+        const letters = ['all', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        const container = document.getElementById('letterJump');
+        container.innerHTML = letters.map(letter => `
+            <button class="letter-btn ${letter === currentLetter ? 'active' : ''}" data-letter="${letter}">${letter === 'all' ? 'ALL' : letter}</button>
+        `).join('');
+        
+        document.querySelectorAll('.letter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLetter = btn.getAttribute('data-letter');
+                document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderGames();
+            });
+        });
+    }
+    
+    async function init() {
+        const container = document.getElementById('gamesContainer');
+        container.innerHTML = '<div class="no-results"><div style="text-align:center"><div style="width:40px;height:40px;border:3px solid rgba(255,222,0,0.2);border-top-color:#ffde00;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px"></div><p>Loading Pokémon fan games...</p></div></div>';
+        
+        romLibrary = await fetchGames();
+        buildLetterJump();
+        renderGames();
+    }
+    
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        searchTerm = e.target.value;
+        renderGames();
+    });
+    
+    document.getElementById('fullscreenCloseBtn').addEventListener('click', closeEmulator);
+    document.getElementById('fullscreenModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('fullscreenModal')) closeEmulator();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (document.getElementById('fullscreenModal').classList.contains('active') && e.key === 'Escape') {
+            closeEmulator();
+        }
+    });
+    
+    init();
+</script>
+</body>
+</html>
